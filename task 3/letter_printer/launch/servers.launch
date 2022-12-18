@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+ 
+ <node name="letter_printer_node"
+    pkg="letter_printer"
+    type="single_letter.py"
+    output="screen"/>
+    
+     <node name="repeat_letter_node"
+    pkg="letter_printer"
+    type="repeat_letter.py"
+    output="screen"/>
+ 
+</launch>

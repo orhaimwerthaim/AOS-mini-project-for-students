@@ -1,0 +1,42 @@
+{
+    "PlpMain": {
+        "Project": "printHello",
+        "Name": "printLetter",
+        "Type": "Glue",
+        "Version": 1.0
+    },
+    "GlueFramework": "ROS",
+    "ModuleResponse": {
+        "ResponseRules": [
+            {
+                "Response": "eSuccess",
+                "ConditionCodeWithLocalVariables": "True"
+            }
+        ]
+    },
+    "ModuleActivation": {
+        "RosService": {
+            "ImportCode": [
+                {
+                    "From": "std_msgs.msg",
+                    "Import": ["Int8","Bool", "String"]
+                },
+                {
+                    "From": "letter_printer.srv",
+                    "Import": ["*"]
+                }
+            ],
+            "ServicePath": "/print_single_letter",
+            "ServiceName": "single_letter_print",
+            "ServiceParameters": [
+                {
+                    "ServiceFieldName": "letter",
+                    "AssignServiceFieldCode": "letter_to_print2"
+                }
+            ]
+        }
+    },
+    "LocalVariablesInitialization": [
+   
+    ]
+}

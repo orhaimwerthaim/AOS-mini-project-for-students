@@ -1,0 +1,39 @@
+{
+    "PlpMain": {
+        "Project": "printHello",
+        "Name": "printLetter",
+        "Type": "PLP",
+        "Version": 1
+    },
+    "GlobalVariableModuleParameters": [
+        {
+            "Name": "oLetter",
+            "Type": "string"
+        }
+    ], 
+    "Preconditions":{
+        "PlannerAssistancePreconditionsAssignments": [
+                {
+                    "AssignmentName": "guide",
+                    "AssignmentCode": [
+                        "__heuristicValue=0;",
+                        "__heuristicValue = (state.printed == \"\" && oLetter==\"h\") ? 100 : __heuristicValue;",
+                        "__heuristicValue = (state.printed == \"h\" && oLetter==\"e\") ? 100 : __heuristicValue;",
+                        "__heuristicValue = (state.printed == \"he\" && oLetter==\"l\") ? 100 : __heuristicValue;",
+                        "__heuristicValue = (state.printed == \"hello \" && oLetter==\"w\") ? 100 : __heuristicValue;",
+                        "__heuristicValue = (state.printed == \"hello w\" && oLetter==\"o\") ? 100 : __heuristicValue;"
+                    ]
+                }
+            ]
+    },
+    "DynamicModel": {
+        "NextStateAssignments": [
+            {
+                "AssignmentCode": [
+                "state__.printed += oLetter;",
+                "__moduleResponse = eSuccesss;",
+                "__reward = -16;"]
+            }
+        ]
+    }
+}

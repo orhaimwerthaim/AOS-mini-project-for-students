@@ -1,0 +1,71 @@
+{
+    "PlpMain": {
+        "Project": "printHello",
+        "Name": "environment",
+        "Type": "Environment",
+        "Version": 1
+    },
+    "EnvironmentGeneral": {
+        "Max_concurrent_actions": 1,
+        "Horizon": 11,
+        "Discount": 0.9999
+    },
+    "GlobalVariableTypes": [ ],
+    "GlobalVariablesDeclaration": [
+        {
+            "Name": "lh",
+            "Type": "string",
+            "DefaultCode": "state.lh=\"h\";",
+            "IsActionParameterValue": true
+        },
+        {
+            "Name": "le",
+            "Type": "string",
+            "DefaultCode": "state.le=\"e\";",
+            "IsActionParameterValue": true
+        },
+        {
+            "Name": "ll",
+            "Type": "string",
+            "DefaultCode": "state.ll=\"l\";",
+            "IsActionParameterValue": true
+        },
+        {
+            "Name": "lo",
+            "Type": "string",
+            "DefaultCode": "state.lo=\"o\";",
+            "IsActionParameterValue": true
+        },  
+        {
+            "Name": "repeat_letter2",
+            "Type": "int",
+            "DefaultCode": "state.repeat_letter2=2;",
+            "IsActionParameterValue": true
+        },  
+        {
+            "Name": "repeat_letter1",
+            "Type": "int",
+            "DefaultCode": "state.repeat_letter1=1;",
+            "IsActionParameterValue": true
+        },  
+        {
+            "Name": "printed",
+            "Type": "string",
+            "DefaultCode": "state.printed=\"\";"
+        }
+    ],
+    "InitialBeliefStateAssignments": [],
+    "SpecialStates": [
+        {
+            "StateConditionCode": "state.printed == \"hello world\"",
+            "Reward": 100.0
+        },
+        {
+            "StateConditionCode": "state.printed.length() > 12",
+            "Reward": -100.0,
+            "IsGoalState": true
+        }
+    ],
+    "ExtrinsicChangesDynamicModel": [
+    ]
+}

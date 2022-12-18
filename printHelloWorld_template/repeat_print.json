@@ -1,0 +1,29 @@
+{
+    "PlpMain": {
+        "Project": "printHello",
+        "Name": "repeat_print",
+        "Type": "PLP",
+        "Version": 1
+    },
+    "GlobalVariableModuleParameters": [ 
+    ], 
+    "Preconditions":{
+        "GlobalVariablePreconditionAssignments": [
+            {
+                "AssignmentCode": "__meetPrecondition = oTimes == 2;"
+            }
+          ],
+	"ViolatingPreconditionPenalty":0,
+        "PlannerAssistancePreconditionsAssignments": [ 
+            ]
+    },
+    "DynamicModel": {
+        "NextStateAssignments": [
+            {
+                "AssignmentCode": [
+                "for(int i =0; i < oTimes;i++)"
+                ]
+            }
+        ]
+    }
+}

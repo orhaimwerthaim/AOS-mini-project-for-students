@@ -1,0 +1,4 @@
+string letter
+int8 times
+---
+bool success
