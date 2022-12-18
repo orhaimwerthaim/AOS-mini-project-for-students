@@ -24,7 +24,8 @@ Change permissions for the skill files (`repeat_letter.py` and `single_letter.py
 * Check that they are working by invoking them from the command line using `rosservice call`
 *  Create a ROS node the calls the different services to print 'hello world' (see [ROS service client tutorial](http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29)). 
 
-## Task 3.1.2 
+## Task 3.1.2
+[Second submission: 7pts]</br>
 Your job is to solve the problem using the AOS. You will need to document the skills, environment, and goal.
 To give you an easy start, we supply partial documentation that may have some errors in it (see the `printHelloWorld_template` directory). </br></br>
 
@@ -55,4 +56,76 @@ If the 'hello world' is printed, a reward of 100 is given, and we reach a termin
 * Errors can be spotted by looking at the terminal where the AOS is running. </br>
   
 ### What you need to submit
-* the corrected documentation of the Environment file.
+* the documentation.
+* a print of the "Get Execution Outcome" response, sent after a succsefful run of the problem.
+* a link to a video screen recording of you sending the request so we see that everything is running well (Since you are not running a real robot or a Gazebo simulation, the skills will print their output on the terminal where the AOS server is running.).
+
+
+
+## Task 3.2
+In this task, you will meet some of the challenges of decision making under uncertainty.</br> </br>
+
+### Preliminary instructions:
+Download the environment to your catkin/src directory.</br>
+Build the code using `catkin_make` </br>
+Run the launch file, and see how exposed services affect the environment.</br> 
+
+
+### 3.2.1 Connect the AOS to the robot skills
+[Second submission: 8pts]</br>
+In this first phase, you are requested to create and test the basic building blocks for connecting a robot to the AOS.</br>
+The documentation should include an environment file, an SD file, and AM for each skill. Your goal is to allow the AOS to activate a sequence of actions without automatic decision-making. Since we do not activate the decision making algorithm, and just want to see that you can activate skills using the AOS at this phase,  
+you don't need to model correctly the effects of each skill and the probability of observations.
+Therefore, the environment, SD, and AM files can be almost empty. You will modify them
+in the next step. </br>
+
+Steps:</br>
+* Document the robot's environment and skills.
+* Send an HTTP  "integration" request (with internal simulation).
+* Send an HTTP "get possible actions" request.
+* Send an HTTP "integration" request with a sequence of actions for execution (you should video record their execution).
+</br></br>
+#### You need to submit the following:
+* The documentation.</br>
+* A link to the video recording on youtube.</br>
+
+### 3.2.2 Finish the documentation and run the robot
+[Second submission: 11.5pts]</br>
+In this phase, you are requested to finalize the project documentation and run the robot to solve the task. Now, you need to properly model the environment, effects, and observations based on
+the description below.</br>
+
+#### You need to submit the following:
+* The documentation.
+* A link to the video recording on youtube.
+
+#### Problem description:
+Every afternoon, a mother comes back from work, picks up her baby from daycare, and comes home.</br>
+She wants to rest a bit before his big brothers come, but her baby wants to play, and he is crying for her to come. She activates her home assistant robot and sleeps quietly.</br>
+The robot is programmed to bring the baby toys he enjoys (he has four). The baby plays with each toy type for a certain amount of time, depending on his Mood.</br>
+The location of each toy depends on where the baby left them yesterday. </br>
+The robot can navigate between the four possible locations of toys and the baby's location. The pick skill must know the exact toy type for a successful pick, and the baby does not allow the robot to pick the toys he received. The robot cannot pick more than one toy at a time. The pick skill accurately reports success or failure if these conditions were met. A successful pick cost is -1, but when it fails, it takes more time and costs -2.</br> 
+The place skill return success if the robot is actually holding a toy. The place skill cost is -3 when it fails (if not holding a toy) and -1 otherwise. navigate skill cost is -3, with an additional penalty of -1 if asked to navigate its current location (which may cause orientation loss).  </br>
+</br>
+</br>
+How the toys are ordered:</br>
+Every evening the cute baby throws a toy to the first location. The probability for each toy to be thrown is [toyA:0.1, toyB:0.05, toyC:0.8, toyD:0.05]. Next, he throws a toy to the second location with a probability of [toyA:0.7, toyB:0.1, toyC:0.1, toyD:0.1] (the weight of the toy in the first location is evenly distributed to the other toys), then he throws to the third location (both toys have the same chance here), and the last toy is thrown to the fourth location.</br> </br>
+
+Remember that when using automated planning, you need to describe the problem, not solve it. Use the "InitialBeliefStateAssignments" in the environment file to describe the initial location of each object. Just tell the same story in code :).</br> </br>
+
+As said, the baby plays with each toy for a different number of minutes, depending on its mood. The mother observed the baby's behavior and saw that he plays with his toys for periods of [10,20,10,40] minutes. First, he thinks about how much he likes toyA and assigns a play time for it with a discreet distribution of p([10=0.8,20=0.05,10=0.1,40=0.05]), then for toyB with p([10=0.1,20=0.7,10=0.1,40=0.1]), next it randomly selects a period for toyC, and toyD receives the remaining period.</br>
+These periods are rewards given when the robot places each toy and the baby's lap.</br>
+</br>
+
+The robot is allowed to use the pick skill only six times.</br>
+The task ends (terminal states) when the robot gives the baby all of the toys, or when it uses all of its pick actions and is not currently holding a toy, or if it uses the pick skill more times than allowed.</br>
+
+To solve this problem, you will write a default policy.</br>
+
+## Task 3.2.3 Solving the problem with coding (Not by the AOS)
+[Second submission: 11.5pts]</br>
+Write a ROS node (using python) that calls the needed services to perform task 3.2.2.</br>
+Activate all the services (you can use the launch file) and your node.</br>
+</br></br>
+You need to submit the following::
+* Your code.
+* A YouTube link to a video recording of your code running and operating the robot.
