@@ -1,0 +1,1 @@
+# AOS-mini-project-for-students
