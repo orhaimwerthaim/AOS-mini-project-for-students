@@ -24,8 +24,7 @@ Change permissions for the skill files (`repeat_letter.py` and `single_letter.py
 * Check that they are working by invoking them from the command line using `rosservice call`
 *  Create a ROS node the calls the different services to print 'hello world' (see [ROS service client tutorial](http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29)). 
 
-## Task 3.1.2
-[Second submission: 7pts]</br>
+## Task 3.1.2 
 Your job is to solve the problem using the AOS. You will need to document the skills, environment, and goal.
 To give you an easy start, we supply partial documentation that may have some errors in it (see the `printHelloWorld_template` directory). </br></br>
 
