@@ -109,6 +109,11 @@ Steps:</br>
 * Send an HTTP "get possible actions" request.
 * Send an HTTP "integration" request with a sequence of actions for execution (you should video record their execution).
 </br></br>
+
+Skills description:</br>
+* See the services srv files that describe their parameter.
+* See the `skills_server.py` (located in `task3_env/scripts`) for the services paths.
+
 #### You need to submit the following:
 * The documentation.</br>
 * A link to the video recording on youtube.</br>
