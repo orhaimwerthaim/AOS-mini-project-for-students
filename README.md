@@ -71,6 +71,27 @@ Build the code using `catkin_make` </br>
 Run the launch file, and see how exposed services affect the environment.</br> 
 
 
+#### Problem description:
+Every afternoon, a mother returns from work, picks up her baby from daycare and comes home.
+She wants to rest a bit before his big brothers come, but her baby wants to play, and he is crying for her to come. She activates her home assistant robot and sleeps quietly.</br>
+The robot is programmed to bring the baby toys he enjoys. He has four toys, which we refer to by their colors: green, blue, black, and red. The baby plays with each toy for a certain amount of time, depending on his mood.</br>
+The location of each toy depends on where the baby left them yesterday.</br>
+The robot can navigate between the four possible locations of toys and the baby's location (they are described as locations 0-4, where 4 is the baby's location). The pick skill must know the exact toy type for a successful pick ('green,' 'blue,' 'black,' or 'red'), and the baby does not allow the robot to pick the toys he received. The robot cannot pick more than one toy at a time. The pick skill accurately reports success or failure if these conditions were met. A successful pick cost is -1, but when it fails, it takes more time and costs -2.</br>
+The place skill return success if the robot is actually holding a toy. The place skill cost is -3 when it fails (if not holding a toy) and -1 otherwise. navigate skill cost is -3, with an additional penalty of -1 if asked to navigate its current location (which may cause orientation loss).</br>
+</br>
+
+How the toys are ordered:</br>
+Every evening the cute baby throws the green toy to one of the locations. The probability of the green toy to be placed in the locations is [0:0.1, 1:0.05, 2:0.8, 3:0.05]. Next, he throws the blue toy to one of the remaining locations with a probability of [0:0.7, 1:0.1, 2:0.1, 3:0.1] (the probability of the already occupied location is evenly distributed to the other locations), then he throws to the black toy (both remaining locations have the same chance here). The red toy is thrown to the fourth location.
+
+Remember that when using automated planning, you need to describe the problem, not solve it. Use the "InitialBeliefStateAssignments" in the environment file to describe the initial location of each object. Just tell the story using code :).</br>
+</br>
+As said, the baby plays with each toy for a different number of minutes, depending on its mood. The mother observed the baby's behavior and saw that he plays with his toys for periods of [10,20,10,40] minutes. First, he thinks about how much he likes the green toy and assigns a play time for it with a discreet distribution of p([10=0.8,20=0.05,10=0.1,40=0.05]), then for the blue toy with p([10=0.1,20=0.7,10=0.1,40=0.1]), next it uniformly selects a period for the black, and the red toy receives the remaining period.
+These periods are rewards given when the robot places each toy on the baby's lap (they are the positive place skill reward in these cases).
+</br></br>
+The robot is allowed to use the pick skill only six times.
+The task ends (terminal states) when the robot gives the baby all of the toys, or when it uses all of its pick actions and is not currently holding a toy, or if it uses the pick skill more times than allowed.
+To solve this problem, you will write a default policy.</br>
+
 ### 3.2.1 Connect the AOS to the robot skills
 [Second submission: 8pts]</br>
 In this first phase, you are requested to create and test the basic building blocks for connecting a robot to the AOS.</br>
@@ -98,28 +119,6 @@ the description below.</br>
 * The documentation.
 * A link to the video recording on youtube.
 
-#### Problem description:
-Every afternoon, a mother comes back from work, picks up her baby from daycare, and comes home.</br>
-She wants to rest a bit before his big brothers come, but her baby wants to play, and he is crying for her to come. She activates her home assistant robot and sleeps quietly.</br>
-The robot is programmed to bring the baby toys he enjoys (he has four). The baby plays with each toy type for a certain amount of time, depending on his Mood.</br>
-The location of each toy depends on where the baby left them yesterday. </br>
-The robot can navigate between the four possible locations of toys and the baby's location. The pick skill must know the exact toy type for a successful pick, and the baby does not allow the robot to pick the toys he received. The robot cannot pick more than one toy at a time. The pick skill accurately reports success or failure if these conditions were met. A successful pick cost is -1, but when it fails, it takes more time and costs -2.</br> 
-The place skill return success if the robot is actually holding a toy. The place skill cost is -3 when it fails (if not holding a toy) and -1 otherwise. navigate skill cost is -3, with an additional penalty of -1 if asked to navigate its current location (which may cause orientation loss).  </br>
-</br>
-</br>
-How the toys are ordered:</br>
-Every evening the cute baby throws a toy to the first location. The probability for each toy to be thrown is [toyA:0.1, toyB:0.05, toyC:0.8, toyD:0.05]. Next, he throws a toy to the second location with a probability of [toyA:0.7, toyB:0.1, toyC:0.1, toyD:0.1] (the weight of the toy in the first location is evenly distributed to the other toys), then he throws to the third location (both toys have the same chance here), and the last toy is thrown to the fourth location.</br> </br>
-
-Remember that when using automated planning, you need to describe the problem, not solve it. Use the "InitialBeliefStateAssignments" in the environment file to describe the initial location of each object. Just tell the same story in code :).</br> </br>
-
-As said, the baby plays with each toy for a different number of minutes, depending on its mood. The mother observed the baby's behavior and saw that he plays with his toys for periods of [10,20,10,40] minutes. First, he thinks about how much he likes toyA and assigns a play time for it with a discreet distribution of p([10=0.8,20=0.05,10=0.1,40=0.05]), then for toyB with p([10=0.1,20=0.7,10=0.1,40=0.1]), next it randomly selects a period for toyC, and toyD receives the remaining period.</br>
-These periods are rewards given when the robot places each toy and the baby's lap.</br>
-</br>
-
-The robot is allowed to use the pick skill only six times.</br>
-The task ends (terminal states) when the robot gives the baby all of the toys, or when it uses all of its pick actions and is not currently holding a toy, or if it uses the pick skill more times than allowed.</br>
-
-To solve this problem, you will write a default policy.</br>
 
 ## Task 3.2.3 Solving the problem with coding (Not by the AOS)
 [Second submission: 11.5pts]</br>
