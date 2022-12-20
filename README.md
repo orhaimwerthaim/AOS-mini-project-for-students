@@ -91,9 +91,11 @@ To solve this problem, you will write a default policy.</br>
 
 ### Preliminary instructions:
 Download the environment to your catkin/src directory.</br>
+Place the `objects` directory (located inside `task3_env`) in your `~/.gazebo/models` directory (override old files if needed). </br>
 Build the code using `catkin_make` </br>
 Run the launch file, and see how exposed services affect the environment.</br> 
 The Gazebo and Rviz will start after running the `task3_env` launch file. The environment starts so that only the robot is visible. After the first skill call, the toys and child objects are generated. The toys are generated as colored balls and the child as a blue box. When picking a toy, it is teleported to an area outside the room. If a toy is placed near the child, it is teleported to a different area outside the room (not to deal with obstacles avoidance).</br>
+
 
 ### 3.2.1 Connect the AOS to the robot skills
 [Second submission: 8pts]</br>
