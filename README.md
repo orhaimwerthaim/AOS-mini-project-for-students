@@ -95,6 +95,13 @@ Place the `objects` directory (located inside `task3_env`) in your `~/.gazebo/mo
 Build the code using `catkin_make` </br>
 Run the launch file, and see how exposed services affect the environment.</br> 
 The Gazebo and Rviz will start after running the `task3_env` launch file. The environment starts so that only the robot is visible. After the first skill call, the toys and child objects are generated. The toys are generated as colored balls and the child as a blue box. When picking a toy, it is teleported to an area outside the room. If a toy is placed near the child, it is teleported to a different area outside the room (not to deal with obstacles avoidance).</br>
+</br>
+Commands you should be able to run after `catkin_make`:</br>
+to run the environment: `roslaunch task3_env task3_env.launch`</br>
+to navigate to locations (0-4): `rosservice call /navigate "location: 0"`</br>
+to pick toys when the robot is near them (toy_type can take 'green',`blue`,`black` or `red`): `rosservice call /pick "toy_type: 'green'"` </br>
+to place a toy: `rosservice call /place "{}" `</br>
+to receive internal information on the real state of the world (you are not allowed to use this service in your code): `rosservice call /info "{}" `</br>
 
 
 ### 3.2.1 Connect the AOS to the robot skills
@@ -138,3 +145,4 @@ Activate all the services (you can use the launch file) and your node.</br>
 You need to submit the following::
 * Your code.
 * A YouTube link to a video recording of your code running and operating the robot.
+* the output of a `rosservice call /info "{}" ` after your code ends its execution.
