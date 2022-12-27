@@ -135,6 +135,7 @@ the description below.</br>
 #### You need to submit the following:
 * The documentation.
 * A link to the video recording on youtube.
+* Run the experiment ten times and submit the output of calling `rosservice call /info "{}" after the robot stops at each experiment. 
 
 
 ## Task 3.2.3 Solving the problem with coding (Not by the AOS)
@@ -142,7 +143,7 @@ the description below.</br>
 Write a ROS node (using python) that calls the needed services to perform task 3.2.2.</br>
 Activate all the services (you can use the launch file) and your node.</br>
 </br></br>
-You need to submit the following::
+You need to submit the following:
 * Your code.
 * A YouTube link to a video recording of your code running and operating the robot.
-* the output of a `rosservice call /info "{}" ` after your code ends its execution.
+* Run the experiment ten times and submit the output of calling `rosservice call /info "{}" after the robot stops at each experiment.
