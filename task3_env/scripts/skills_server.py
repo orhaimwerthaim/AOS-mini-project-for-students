@@ -171,8 +171,11 @@ def handle_navigate(req):
         res.success = client.get_state() == SUCCEEDED
         # print(res)
     global state_robot_location
+    _reward = -3
+    if state_robot_location == req.location:
+        _reward=-4
     state_robot_location = req.location
-    add_action(skill_name="navigate", parameters=req, observation=res, reward=-1)
+    add_action(skill_name="navigate", parameters=req, observation=res, reward=_reward)
     return res
 
 def handle_info(req):
