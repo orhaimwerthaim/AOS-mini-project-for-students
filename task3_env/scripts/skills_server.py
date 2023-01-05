@@ -173,6 +173,7 @@ def handle_navigate(req):
     global state_robot_location
     _reward = -3
     if state_robot_location == req.location:
+        res.success = False
         _reward=-4
     state_robot_location = req.location
     add_action(skill_name="navigate", parameters=req, observation=res, reward=_reward)
